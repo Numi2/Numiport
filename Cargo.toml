@@ -1,0 +1,61 @@
+[package]
+name = "numiport"
+version = "0.1.0"
+edition = "2021"
+authors = "Numan Thabit"
+description = "Transport for Solana Validators"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/numi2/numiport"
+
+[dependencies]
+# Async runtime and utilities
+tokio = { version = "1", features = ["full"] }
+bytes = "1"
+futures = "0.3"
+
+# Network and system interfaces
+socket2 = "0.5"
+nix = "0.28"
+libc = "0.2"
+rtnetlink = "0.14"
+
+# Cryptography
+snow = "0.9"
+chacha20poly1305 = "0.10"
+aes-gcm-siv = { version = "0.11", optional = true }
+hkdf = "0.12"
+hmac = "0.12"
+sha2 = "0.10"
+blake3 = "1"
+rand = "0.8"
+
+# Utilities
+thiserror = "1"
+anyhow = "1"
+bitvec = "1"
+smallvec = "1"
+ahash = "0.8"
+
+# Metrics and observability
+prometheus = "0.13"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+opentelemetry = { version = "0.21", optional = true }
+opentelemetry-prometheus = { version = "0.12", optional = true }
+
+[dev-dependencies]
+# Testing and fuzzing
+proptest = "1"
+arbitrary = "1"
+criterion = "0.5"
+cargo-fuzz = "0.11"
+
+[features]
+default = []
+aes-gcm-siv = ["dep:aes-gcm-siv"]
+opentelemetry = ["dep:opentelemetry", "dep:opentelemetry-prometheus"]
+
+[[bench]]
+name = "scheduler"
+harness = false
+
