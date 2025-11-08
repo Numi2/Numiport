@@ -1,0 +1,27 @@
+[package]
+name = "numiport-fuzz"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+numiport = { path = ".." }
+
+[[bin]]
+name = "fuzz_wire_parse"
+path = "fuzz_targets/fuzz_wire_parse.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_tlv_iter"
+path = "fuzz_targets/fuzz_tlv_iter.rs"
+test = false
+doc = false
+bench = false
+
